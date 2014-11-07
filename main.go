@@ -14,6 +14,14 @@ func errorCallback(err glfw.ErrorCode, desc string) {
 	fmt.Printf("%v: %v\n", err, desc)
 }
 
+func keyCallback(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
+	if key == glfw.KeyM && action == glfw.Press {
+		menu.Toggle()
+	}
+}
+
+var menu Menu
+
 func main() {
 	runtime.LockOSThread()
 
@@ -37,6 +45,7 @@ func main() {
 		panic(err)
 	}
 	window.MakeContextCurrent()
+	window.SetKeyCallback(keyCallback)
 
 	if err := gl.Init(); err != nil {
 		panic(err)
@@ -49,7 +58,6 @@ func main() {
 
 	width, height := window.GetSize()
 
-	var menu Menu
 	menu.ResizeWindow(float32(width), float32(height))
 	menu.SetDimension(100, 200)
 	lowerLeft := menu.FindCenter()
