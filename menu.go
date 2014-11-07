@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	glfw "github.com/go-gl/glfw3"
 	"github.com/go-gl/glow/gl-core/3.3/gl"
 	"github.com/go-gl/mathgl/mgl32"
@@ -119,11 +118,6 @@ func (menu *Menu) Load(lowerLeft Point) error {
 	menu.eboData = make([]int32, menu.eboIndexCount, menu.eboIndexCount)
 	menu.makeBufferData()
 
-	fmt.Println(menu.vboData)
-	fmt.Println(menu.vboIndexCount)
-	fmt.Println(menu.eboData)
-	fmt.Println(menu.eboIndexCount)
-
 	// setup context
 	gl.BindVertexArray(menu.vao)
 	gl.BindBuffer(gl.ARRAY_BUFFER, menu.vbo)
@@ -198,8 +192,5 @@ func (menu *Menu) FindCenter() (lowerLeft Point) {
 
 	lowerLeft.X = float32(windowWidthHalf) - menuWidthHalf
 	lowerLeft.Y = float32(windowHeightHalf) - menuHeightHalf
-	fmt.Println(windowWidthHalf, windowHeightHalf)
-	fmt.Println(menuWidthHalf, menuHeightHalf)
-	fmt.Println(lowerLeft)
 	return
 }
