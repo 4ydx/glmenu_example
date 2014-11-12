@@ -103,8 +103,16 @@ func main() {
 	text.SetTextLowerBound(0.5)
 	text.SetColor(0, 0, 0, 1)
 	text.ResizeWindow(float32(width), float32(height))
+
+	// perform action
 	text.OnClick = func(xPos, yPos float64) (err error) {
 		fmt.Println("clicked at", xPos, yPos)
+		return
+	}
+
+	// show animation
+	text.OnHover = func(xPos, yPos float64) (err error) {
+		text.AddScale(menu.TextScaleRate)
 		return
 	}
 	menu.Text = append(menu.Text, text)
@@ -113,6 +121,8 @@ func main() {
 	for !window.ShouldClose() {
 		gl.Clear(gl.COLOR_BUFFER_BIT)
 
+		xPos, yPos := window.GetCursorPosition()
+		menu.ScreenHover(xPos, yPos)
 		if menu.Draw() {
 			// pause gameplay
 		} else {
