@@ -1,31 +1,40 @@
 package main
 
 import (
-	"fmt"
+	glmenu "github.com/4ydx/glmenu"
 )
 
 func menuInit() (err error) {
 	// menu settings
 	width, height := window.GetSize()
 
-	// 2DO: set up like the gltext package so that this is internal...
-	lowerLeft := menu.FindCenter()
-	fontScale := int32(20)
-	menu.Load(lowerLeft, 400, 350, fontScale)
+	margin := float32(60)
+	fontScale := int32(25)
+	menu.Load(400, 350, fontScale)
+	menu.Font.SetTextLowerBound(0.5)
 	menu.ResizeWindow(float32(width), float32(height))
 
-	menu.Font.SetTextLowerBound(0.5)
+	//2DO: sounds
 
-	label := menu.AddLabel("test me", 0, 0)
+	// label
+	var label2 glmenu.Label
+	menu.AddLabel(&label2, "Start")
 
-	label.OnClick = func(xPos, yPos float64) (err error) {
-		fmt.Println("clicked at", xPos, yPos)
+	label2.Text.SetPosition(-(float32(menu.Width-margin) - label2.Text.Width), 0)
+	label2.Text.SetColor(0.5, 0.5, 0.5, 1)
+	label2.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
+		menu.Toggle()
 		return
 	}
-
-	label.OnHover = func(xPos, yPos float64) (err error) {
+	label2.OnHover = func(label *glmenu.Label, xPos, yPos float64) (err error) {
 		label.Text.AddScale(menu.TextScaleRate)
 		return
 	}
+	label2.OnNotHover = func(label *glmenu.Label) (err error) {
+		label.Text.AddScale(-menu.TextScaleRate)
+		return
+	}
+	label2.AddShadow(3, 0, 0, 0)
+
 	return
 }
