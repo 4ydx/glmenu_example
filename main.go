@@ -70,6 +70,8 @@ func main() {
 	fmt.Println("Opengl version", version)
 
 	menuInit(window)
+	menu.Toggle()
+
 	gl.ClearColor(0, 0, 0, 0.0)
 	for !window.ShouldClose() {
 		gl.Clear(gl.COLOR_BUFFER_BIT)
