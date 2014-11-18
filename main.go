@@ -17,19 +17,22 @@ func errorCallback(err glfw.ErrorCode, desc string) {
 
 func keyCallback(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
 	if key == glfw.KeyM && action == glfw.Press {
-		menu.Toggle()
+		mainMenu.Toggle()
+	}
+	if key == glfw.KeyO && action == glfw.Press {
+		optionMenu.Toggle()
 	}
 }
 
 func mouseButtonCallback(w *glfw.Window, button glfw.MouseButton, action glfw.Action, mods glfw.ModifierKey) {
 	if button == glfw.MouseButtonLeft && action == glfw.Press {
 		xPos, yPos := window.GetCursorPosition()
-		//fmt.Println("button", button, xPos, yPos)
-		menu.ScreenClick(xPos, yPos)
+		mainMenu.ScreenClick(xPos, yPos)
 	}
 }
 
-var menu glmenu.Menu
+var mainMenu glmenu.Menu
+var optionMenu glmenu.Menu
 var window *glfw.Window
 
 func main() {
@@ -69,16 +72,17 @@ func main() {
 	version := gl.GoStr(gl.GetString(gl.VERSION))
 	fmt.Println("Opengl version", version)
 
-	menuInit(window)
-	menu.Toggle()
+	mainMenuInit(window)
+	optionMenuInit(window)
+	mainMenu.Toggle()
 
 	gl.ClearColor(0, 0, 0, 0.0)
 	for !window.ShouldClose() {
 		gl.Clear(gl.COLOR_BUFFER_BIT)
 
 		xPos, yPos := window.GetCursorPosition()
-		menu.ScreenHover(xPos, yPos)
-		if menu.Draw() {
+		mainMenu.ScreenHover(xPos, yPos)
+		if mainMenu.Draw() || optionMenu.Draw() {
 			// pause gameplay
 		} else {
 			// do stuff
@@ -86,4 +90,6 @@ func main() {
 		window.SwapBuffers()
 		glfw.PollEvents()
 	}
+	mainMenu.Release()
+	optionMenu.Release()
 }

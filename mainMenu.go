@@ -5,56 +5,57 @@ import (
 	glfw "github.com/go-gl/glfw3"
 )
 
-func menuInit(window *glfw.Window) (err error) {
+func mainMenuInit(window *glfw.Window) (err error) {
 	fontScale := int32(25)
 	width, height := window.GetSize()
-	menu.Load(float32(width), float32(height), fontScale)
-	menu.Font.SetTextLowerBound(0.3)
-	menu.ResizeWindow(float32(width), float32(height))
+	mainMenu.Load(float32(width), float32(height), fontScale)
+	mainMenu.Font.SetTextLowerBound(0.3)
+	mainMenu.ResizeWindow(float32(width), float32(height))
 
 	//2DO: sounds
 
 	// start
 	var label glmenu.Label
-	menu.AddLabel(&label, "Start")
+	mainMenu.AddLabel(&label, "Start")
 
 	label.AddShadow(1.5, 0, 0, 0)
 	label.Text.SetColor(0.5, 0.5, 0.5, 1)
 	label.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
-		menu.Toggle()
+		mainMenu.Toggle()
 		return
 	}
 	label.OnHover = func(label *glmenu.Label, xPos, yPos float64) (err error) {
-		label.Text.AddScale(menu.TextScaleRate)
+		label.Text.AddScale(mainMenu.TextScaleRate)
 		return
 	}
 	label.OnNotHover = func(label *glmenu.Label) (err error) {
-		label.Text.AddScale(-menu.TextScaleRate)
+		label.Text.AddScale(-mainMenu.TextScaleRate)
 		return
 	}
 
 	// options
 	var label2 glmenu.Label
-	menu.AddLabel(&label2, "Options")
+	mainMenu.AddLabel(&label2, "Options")
 
 	label2.AddShadow(1.5, 0, 0, 0)
 	label2.Text.SetColor(0.5, 0.5, 0.5, 1)
 	label2.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
-		// 2DO: show another menu
+		mainMenu.Toggle()
+		optionMenu.Toggle()
 		return
 	}
 	label2.OnHover = func(label *glmenu.Label, xPos, yPos float64) (err error) {
-		label.Text.AddScale(menu.TextScaleRate)
+		label.Text.AddScale(mainMenu.TextScaleRate)
 		return
 	}
 	label2.OnNotHover = func(label *glmenu.Label) (err error) {
-		label.Text.AddScale(-menu.TextScaleRate)
+		label.Text.AddScale(-mainMenu.TextScaleRate)
 		return
 	}
 
 	// quit
 	var label3 glmenu.Label
-	menu.AddLabel(&label3, "Quit")
+	mainMenu.AddLabel(&label3, "Quit")
 
 	label3.AddShadow(1.5, 0, 0, 0)
 	label3.Text.SetColor(0.5, 0.5, 0.5, 1)
@@ -63,11 +64,11 @@ func menuInit(window *glfw.Window) (err error) {
 		return
 	}
 	label3.OnHover = func(label *glmenu.Label, xPos, yPos float64) (err error) {
-		label.Text.AddScale(menu.TextScaleRate)
+		label.Text.AddScale(mainMenu.TextScaleRate)
 		return
 	}
 	label3.OnNotHover = func(label *glmenu.Label) (err error) {
-		label.Text.AddScale(-menu.TextScaleRate)
+		label.Text.AddScale(-mainMenu.TextScaleRate)
 		return
 	}
 
