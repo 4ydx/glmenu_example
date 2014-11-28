@@ -17,9 +17,15 @@ func errorCallback(err glfw.ErrorCode, desc string) {
 
 func keyCallback(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
 	if key == glfw.KeyM && action == glfw.Press {
+		if optionMenu.Visible {
+			optionMenu.Toggle()
+		}
 		mainMenu.Toggle()
 	}
 	if key == glfw.KeyO && action == glfw.Press {
+		if mainMenu.Visible {
+			mainMenu.Toggle()
+		}
 		optionMenu.Toggle()
 	}
 }
@@ -74,7 +80,7 @@ func main() {
 
 	mainMenuInit(window)
 	optionMenuInit(window)
-	mainMenu.Toggle()
+	//mainMenu.Toggle()
 
 	gl.ClearColor(0, 0, 0, 0.0)
 	for !window.ShouldClose() {
@@ -82,6 +88,7 @@ func main() {
 
 		xPos, yPos := window.GetCursorPosition()
 		mainMenu.ScreenHover(xPos, yPos)
+		optionMenu.ScreenHover(xPos, yPos)
 		if mainMenu.Draw() || optionMenu.Draw() {
 			// pause gameplay
 		} else {

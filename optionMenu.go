@@ -19,7 +19,6 @@ func optionMenuInit(window *glfw.Window) (err error) {
 	var label glmenu.Label
 	optionMenu.AddLabel(&label, "Music Volume")
 
-	label.AddShadow(1.5, 0, 0, 0)
 	label.Text.SetColor(0.5, 0.5, 0.5, 1)
 	label.Text.SetPosition(0, 0)
 	label.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
@@ -34,7 +33,7 @@ func optionMenuInit(window *glfw.Window) (err error) {
 		label.Text.AddScale(-optionMenu.TextScaleRate)
 		return
 	}
-	label.UpdateShadow(1.5, 0, 0, 0)
+	label.AddShadow(1.5, 0, 0, 0)
 
 	var label3 glmenu.Label
 	optionMenu.AddLabel(&label3, "Back")
@@ -55,7 +54,7 @@ func optionMenuInit(window *glfw.Window) (err error) {
 		label.Text.AddScale(-optionMenu.TextScaleRate)
 		return
 	}
-	label3.UpdateShadow(1.5, 0, 0, 0)
+	label3.AddShadow(1.5, 0, 0, 0)
 
 	return
 }
