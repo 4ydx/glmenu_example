@@ -34,6 +34,7 @@ func mouseButtonCallback(w *glfw.Window, button glfw.MouseButton, action glfw.Ac
 	if button == glfw.MouseButtonLeft && action == glfw.Press {
 		xPos, yPos := window.GetCursorPosition()
 		mainMenu.ScreenClick(xPos, yPos)
+		optionMenu.ScreenClick(xPos, yPos)
 	}
 }
 
