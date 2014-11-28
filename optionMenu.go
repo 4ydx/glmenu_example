@@ -8,10 +8,9 @@ import (
 	"github.com/go-gl/mathgl/mgl32"
 )
 
-// 2DO: figure out how to right align the text... it
-//      is automatically centered right now...
 func optionMenuInit(window *glfw.Window) (err error) {
-	//margin := float32(100)
+	topMargin := float32(50)
+	leftMargin := float32(30)
 	fontScale := int32(25)
 	width, height := window.GetSize()
 	optionMenu.Load(float32(width), float32(height), fontScale)
@@ -23,7 +22,6 @@ func optionMenuInit(window *glfw.Window) (err error) {
 	optionMenu.AddLabel(&label, "Music Volume")
 
 	label.Text.SetColor(0.5, 0.5, 0.5, 1)
-	label.Text.SetPosition(0, 0)
 	label.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
 		fmt.Println("clicked", xPos, yPos)
 		return
@@ -36,17 +34,12 @@ func optionMenuInit(window *glfw.Window) (err error) {
 		label.Text.AddScale(-optionMenu.TextScaleRate)
 		return
 	}
-	label.Text.Justify(gltext.AlignLeft)
-	label.AddShadow(1.5, 0, 0, 0)
 
 	var label3 glmenu.Label
 	optionMenu.AddLabel(&label3, "Back")
 
-	label3.AddShadow(1.5, 0, 0, 0)
 	label3.Text.SetColor(0.5, 0.5, 0.5, 1)
-	label3.Text.SetPosition(0, 0-label.Text.Height)
 	label3.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
-		fmt.Println("fuck")
 		optionMenu.Toggle()
 		mainMenu.Toggle()
 		return
@@ -59,8 +52,13 @@ func optionMenuInit(window *glfw.Window) (err error) {
 		label.Text.AddScale(-optionMenu.TextScaleRate)
 		return
 	}
-	label3.Text.Justify(gltext.AlignLeft)
-	label3.AddShadow(1.5, 0, 0, 0)
 
+	label.Text.SetPosition(-float32(width)/2.0+leftMargin, float32(height)/2.0-topMargin)
+	label.Text.Justify(gltext.AlignLeft)
+	label3.Text.SetPosition(-float32(width)/2.0+leftMargin, float32(height)/2.0-topMargin-label.Text.Height)
+	label3.Text.Justify(gltext.AlignLeft)
+
+	label.AddShadow(1.5, 0, 0, 0)
+	label3.AddShadow(1.5, 0, 0, 0)
 	return
 }
