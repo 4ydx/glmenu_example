@@ -3,6 +3,7 @@ package main
 import (
 	glmenu "github.com/4ydx/glmenu"
 	glfw "github.com/go-gl/glfw3"
+	"github.com/go-gl/mathgl/mgl32"
 )
 
 func mainMenuInit(window *glfw.Window) (err error) {
@@ -11,6 +12,7 @@ func mainMenuInit(window *glfw.Window) (err error) {
 	mainMenu.Load(float32(width), float32(height), fontScale)
 	mainMenu.Font.SetTextLowerBound(0.3)
 	mainMenu.ResizeWindow(float32(width), float32(height))
+	mainMenu.Background = mgl32.Vec4{0, 0, .20, 0}
 
 	//2DO: sounds
 
@@ -19,7 +21,7 @@ func mainMenuInit(window *glfw.Window) (err error) {
 	mainMenu.AddLabel(&label, "Start")
 
 	label.AddShadow(1.5, 0, 0, 0)
-	label.Text.SetColor(0.5, 0.5, 0.5, 1)
+	label.Text.SetColor(0, 250.0/255.0, 154.0/255.0, 1)
 	label.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
 		mainMenu.Toggle()
 		return

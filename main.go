@@ -80,7 +80,7 @@ func main() {
 
 	mainMenuInit(window)
 	optionMenuInit(window)
-	//mainMenu.Toggle()
+	mainMenu.Toggle()
 
 	gl.ClearColor(0, 0, 0, 0.0)
 	for !window.ShouldClose() {
