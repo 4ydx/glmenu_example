@@ -22,7 +22,7 @@ func optionMenuInit(window *glfw.Window) (err error) {
 	var label glmenu.Label
 	optionMenu.AddLabel(&label, "Music Volume")
 
-	label.Text.SetColor(0.5, 0.5, 0.5, 1)
+	label.Text.SetColor(0.5, 0.5, 0.5)
 	label.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
 		fmt.Println("clicked", xPos, yPos)
 		return
@@ -39,7 +39,7 @@ func optionMenuInit(window *glfw.Window) (err error) {
 	var label3 glmenu.Label
 	optionMenu.AddLabel(&label3, "Back")
 
-	label3.Text.SetColor(0.5, 0.5, 0.5, 1)
+	label3.Text.SetColor(0.5, 0.5, 0.5)
 	label3.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
 		optionMenu.Toggle()
 		mainMenu.Toggle()
