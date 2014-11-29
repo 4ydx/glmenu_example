@@ -42,7 +42,7 @@ func mouseButtonCallback(
 	action glfw.Action,
 	mods glfw.ModifierKey,
 ) {
-	xPos, yPos := window.GetCursorPosition()
+	xPos, yPos := w.GetCursorPosition()
 	if button == glfw.MouseButtonLeft && action == glfw.Press {
 		mainMenu.MouseClick(xPos, yPos, glmenu.MouseLeft)
 		optionMenu.MouseClick(xPos, yPos, glmenu.MouseLeft)

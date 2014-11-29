@@ -6,6 +6,7 @@ import (
 	gltext "github.com/4ydx/gltext"
 	glfw "github.com/go-gl/glfw3"
 	"github.com/go-gl/mathgl/mgl32"
+	"os"
 )
 
 func optionMenuInit(window *glfw.Window) (err error) {
@@ -13,7 +14,11 @@ func optionMenuInit(window *glfw.Window) (err error) {
 	leftMargin := float32(30)
 	fontScale := int32(25)
 	width, height := window.GetSize()
-	optionMenu.Load(float32(width), float32(height), fontScale)
+	err = optionMenu.Load(float32(width), float32(height), fontScale)
+	if err != nil {
+		fmt.Println("error loading font")
+		os.Exit(1)
+	}
 	optionMenu.Font.SetTextLowerBound(0.3)
 	optionMenu.ResizeWindow(float32(width), float32(height))
 	optionMenu.Background = mgl32.Vec4{1, 1, 1, 1}

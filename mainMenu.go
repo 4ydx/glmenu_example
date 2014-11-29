@@ -1,15 +1,21 @@
 package main
 
 import (
+	"fmt"
 	glmenu "github.com/4ydx/glmenu"
 	glfw "github.com/go-gl/glfw3"
 	"github.com/go-gl/mathgl/mgl32"
+	"os"
 )
 
 func mainMenuInit(window *glfw.Window) (err error) {
 	fontScale := int32(25)
 	width, height := window.GetSize()
-	mainMenu.Load(float32(width), float32(height), fontScale)
+	err = mainMenu.Load(float32(width), float32(height), fontScale)
+	if err != nil {
+		fmt.Println("error loading the font")
+		os.Exit(1)
+	}
 	mainMenu.Font.SetTextLowerBound(0.6)
 	mainMenu.ResizeWindow(float32(width), float32(height))
 	mainMenu.Background = mgl32.Vec4{0, 0, .20, 0}
