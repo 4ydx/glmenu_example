@@ -17,23 +17,35 @@ func mainMenuInit(window *glfw.Window) (err error) {
 	//2DO: sounds
 
 	// start
-	var label glmenu.Label
-	mainMenu.AddLabel(&label, "Start")
+	var label1 glmenu.Label
+	mainMenu.AddLabel(&label1, "Start")
 
-	label.Text.SetColor(0.5, 0.5, 0.5)
-	label.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
-		mainMenu.Toggle()
-		return
+	label1.Text.SetColor(0.5, 0.5, 0.5)
+	label1.OnClick = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
+		label.Text.SetColor(250.0/255.0, 0, 154.0/255.0)
 	}
-	label.OnHover = func(label *glmenu.Label, xPos, yPos float64) (err error) {
-		label.Text.SetColor(0, 250.0/255.0, 154.0/255.0)
-		label.Text.AddScale(mainMenu.TextScaleRate)
-		return
+	label1.OnRelease = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
+		if inBox {
+			mainMenu.Toggle()
+		}
+		if label.IsHover {
+			label.Text.SetColor(0, 250.0/255.0, 154.0/255.0)
+		} else {
+			label.Text.SetColor(0.5, 0.5, 0.5)
+		}
+		label.IsClick = false
 	}
-	label.OnNotHover = func(label *glmenu.Label) (err error) {
-		label.Text.SetColor(0.5, 0.5, 0.5)
-		label.Text.AddScale(-mainMenu.TextScaleRate)
-		return
+	label1.OnHover = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
+		if !label.IsClick {
+			label.Text.SetColor(0, 250.0/255.0, 154.0/255.0)
+			label.Text.AddScale(mainMenu.TextScaleRate)
+		}
+	}
+	label1.OnNotHover = func(label *glmenu.Label) {
+		if !label.IsClick {
+			label.Text.SetColor(0.5, 0.5, 0.5)
+			label.Text.AddScale(-mainMenu.TextScaleRate)
+		}
 	}
 
 	// options
@@ -41,20 +53,33 @@ func mainMenuInit(window *glfw.Window) (err error) {
 	mainMenu.AddLabel(&label2, "Options")
 
 	label2.Text.SetColor(0.5, 0.5, 0.5)
-	label2.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
-		mainMenu.Toggle()
-		optionMenu.Toggle()
-		return
+	label2.OnClick = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
+		label.Text.SetColor(250.0/255.0, 0, 154.0/255.0)
 	}
-	label2.OnHover = func(label *glmenu.Label, xPos, yPos float64) (err error) {
+	label2.OnRelease = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
 		label.Text.SetColor(0, 250.0/255.0, 154.0/255.0)
-		label.Text.AddScale(mainMenu.TextScaleRate)
-		return
+		if inBox {
+			mainMenu.Toggle()
+			optionMenu.Toggle()
+		}
+		if label.IsHover {
+			label.Text.SetColor(0, 250.0/255.0, 154.0/255.0)
+		} else {
+			label.Text.SetColor(0.5, 0.5, 0.5)
+		}
+		label.IsClick = false
 	}
-	label2.OnNotHover = func(label *glmenu.Label) (err error) {
-		label.Text.SetColor(0.5, 0.5, 0.5)
-		label.Text.AddScale(-mainMenu.TextScaleRate)
-		return
+	label2.OnHover = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
+		if !label.IsClick {
+			label.Text.SetColor(0, 250.0/255.0, 154.0/255.0)
+			label.Text.AddScale(mainMenu.TextScaleRate)
+		}
+	}
+	label2.OnNotHover = func(label *glmenu.Label) {
+		if !label.IsClick {
+			label.Text.SetColor(0.5, 0.5, 0.5)
+			label.Text.AddScale(-mainMenu.TextScaleRate)
+		}
 	}
 
 	// quit
@@ -62,24 +87,39 @@ func mainMenuInit(window *glfw.Window) (err error) {
 	mainMenu.AddLabel(&label3, "Quit")
 
 	label3.Text.SetColor(0.5, 0.5, 0.5)
-	label3.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
-		window.SetShouldClose(true)
-		return
+	label3.OnClick = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
+		label.Text.SetColor(250.0/255.0, 0, 154.0/255.0)
 	}
-	label3.OnHover = func(label *glmenu.Label, xPos, yPos float64) (err error) {
+	label3.OnRelease = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
 		label.Text.SetColor(0, 250.0/255.0, 154.0/255.0)
-		label.Text.AddScale(mainMenu.TextScaleRate)
-		return
+		if inBox {
+			window.SetShouldClose(true)
+		}
+		if label.IsHover {
+			label.Text.SetColor(0, 250.0/255.0, 154.0/255.0)
+		} else {
+			label.Text.SetColor(0.5, 0.5, 0.5)
+		}
+		label.IsClick = false
 	}
-	label3.OnNotHover = func(label *glmenu.Label) (err error) {
-		label.Text.SetColor(0.5, 0.5, 0.5)
-		label.Text.AddScale(-mainMenu.TextScaleRate)
-		return
+	label3.OnHover = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
+		if !label.IsClick {
+			label.Text.SetColor(0, 250.0/255.0, 154.0/255.0)
+			label.Text.AddScale(mainMenu.TextScaleRate)
+		}
+	}
+	label3.OnNotHover = func(label *glmenu.Label) {
+		if !label.IsClick {
+			label.Text.SetColor(0.5, 0.5, 0.5)
+			label.Text.AddScale(-mainMenu.TextScaleRate)
+		}
 	}
 
 	// simple centering of values
-	totalHeight := label.Text.X2.Y - label.Text.X1.Y + label2.Text.X2.Y - label2.Text.X1.Y + label2.Text.X2.Y - label2.Text.X1.Y
-	label.Text.SetPosition(0, totalHeight/2)
+	totalHeight := label1.Text.X2.Y - label1.Text.X1.Y +
+		label2.Text.X2.Y - label2.Text.X1.Y +
+		label2.Text.X2.Y - label2.Text.X1.Y
+	label1.Text.SetPosition(0, totalHeight/2)
 	label3.Text.SetPosition(0, -totalHeight/2)
 
 	return

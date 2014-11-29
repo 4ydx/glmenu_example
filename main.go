@@ -15,7 +15,13 @@ func errorCallback(err glfw.ErrorCode, desc string) {
 	fmt.Printf("%v: %v\n", err, desc)
 }
 
-func keyCallback(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
+func keyCallback(
+	w *glfw.Window,
+	key glfw.Key,
+	scancode int,
+	action glfw.Action,
+	mods glfw.ModifierKey,
+) {
 	if key == glfw.KeyM && action == glfw.Press {
 		if optionMenu.Visible {
 			optionMenu.Toggle()
@@ -30,11 +36,20 @@ func keyCallback(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action,
 	}
 }
 
-func mouseButtonCallback(w *glfw.Window, button glfw.MouseButton, action glfw.Action, mods glfw.ModifierKey) {
+func mouseButtonCallback(
+	w *glfw.Window,
+	button glfw.MouseButton,
+	action glfw.Action,
+	mods glfw.ModifierKey,
+) {
+	xPos, yPos := window.GetCursorPosition()
 	if button == glfw.MouseButtonLeft && action == glfw.Press {
-		xPos, yPos := window.GetCursorPosition()
-		mainMenu.ScreenClick(xPos, yPos)
-		optionMenu.ScreenClick(xPos, yPos)
+		mainMenu.MouseClick(xPos, yPos, glmenu.MouseLeft)
+		optionMenu.MouseClick(xPos, yPos, glmenu.MouseLeft)
+	}
+	if button == glfw.MouseButtonLeft && action == glfw.Release {
+		mainMenu.MouseRelease(xPos, yPos, glmenu.MouseLeft)
+		optionMenu.MouseRelease(xPos, yPos, glmenu.MouseLeft)
 	}
 }
 
@@ -88,8 +103,8 @@ func main() {
 		gl.Clear(gl.COLOR_BUFFER_BIT)
 
 		xPos, yPos := window.GetCursorPosition()
-		mainMenu.ScreenHover(xPos, yPos)
-		optionMenu.ScreenHover(xPos, yPos)
+		mainMenu.MouseHover(xPos, yPos)
+		optionMenu.MouseHover(xPos, yPos)
 		if mainMenu.Draw() || optionMenu.Draw() {
 			// pause gameplay
 		} else {

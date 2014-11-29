@@ -19,47 +19,41 @@ func optionMenuInit(window *glfw.Window) (err error) {
 	optionMenu.Background = mgl32.Vec4{1, 1, 1, 1}
 	optionMenu.TextScaleRate = 0.05
 
-	var label glmenu.Label
-	optionMenu.AddLabel(&label, "Music Volume")
+	var label1 glmenu.Label
+	optionMenu.AddLabel(&label1, "Music Volume")
 
-	label.Text.SetColor(0.5, 0.5, 0.5)
-	label.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
+	label1.Text.SetColor(0.5, 0.5, 0.5)
+	label1.OnClick = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, isBox bool) {
 		fmt.Println("clicked", xPos, yPos)
-		return
 	}
-	label.OnHover = func(label *glmenu.Label, xPos, yPos float64) (err error) {
+	label1.OnHover = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, isBox bool) {
 		label.Text.AddScale(optionMenu.TextScaleRate)
-		return
 	}
-	label.OnNotHover = func(label *glmenu.Label) (err error) {
+	label1.OnNotHover = func(label *glmenu.Label) {
 		label.Text.AddScale(-optionMenu.TextScaleRate)
-		return
 	}
 
 	var label3 glmenu.Label
 	optionMenu.AddLabel(&label3, "Back")
 
 	label3.Text.SetColor(0.5, 0.5, 0.5)
-	label3.OnClick = func(label *glmenu.Label, xPos, yPos float64) (err error) {
+	label3.OnClick = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, isBox bool) {
 		optionMenu.Toggle()
 		mainMenu.Toggle()
-		return
 	}
-	label3.OnHover = func(label *glmenu.Label, xPos, yPos float64) (err error) {
+	label3.OnHover = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, isBox bool) {
 		label.Text.AddScale(optionMenu.TextScaleRate)
-		return
 	}
-	label3.OnNotHover = func(label *glmenu.Label) (err error) {
+	label3.OnNotHover = func(label *glmenu.Label) {
 		label.Text.AddScale(-optionMenu.TextScaleRate)
-		return
 	}
 
-	label.Text.SetPosition(-float32(width)/2.0+leftMargin, float32(height)/2.0-topMargin)
-	label.Text.Justify(gltext.AlignLeft)
-	label3.Text.SetPosition(-float32(width)/2.0+leftMargin, float32(height)/2.0-topMargin-label.Text.Height)
+	label1.Text.SetPosition(-float32(width)/2.0+leftMargin, float32(height)/2.0-topMargin)
+	label1.Text.Justify(gltext.AlignLeft)
+	label3.Text.SetPosition(-float32(width)/2.0+leftMargin, float32(height)/2.0-topMargin-label1.Text.Height)
 	label3.Text.Justify(gltext.AlignLeft)
 
-	label.AddShadow(1.5, 0, 0, 0)
+	label1.AddShadow(1.5, 0, 0, 0)
 	label3.AddShadow(1.5, 0, 0, 0)
 	return
 }
