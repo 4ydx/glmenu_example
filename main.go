@@ -22,17 +22,21 @@ func keyCallback(
 	action glfw.Action,
 	mods glfw.ModifierKey,
 ) {
-	if key == glfw.KeyM && action == glfw.Press {
-		if optionMenu.Visible {
-			optionMenu.Toggle()
-		}
-		mainMenu.Toggle()
-	}
-	if key == glfw.KeyO && action == glfw.Press {
-		if mainMenu.Visible {
+	if mainMenu.Visible && action == glfw.Release {
+		mainMenu.KeyPress(key)
+	} else {
+		if key == glfw.KeyM && action == glfw.Press {
+			if optionMenu.Visible {
+				optionMenu.Toggle()
+			}
 			mainMenu.Toggle()
 		}
-		optionMenu.Toggle()
+		if key == glfw.KeyO && action == glfw.Press {
+			if mainMenu.Visible {
+				mainMenu.Toggle()
+			}
+			optionMenu.Toggle()
+		}
 	}
 }
 

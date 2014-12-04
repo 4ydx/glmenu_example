@@ -24,7 +24,8 @@ func mainMenuInit(window *glfw.Window) (err error) {
 
 	// start
 	var textbox1 glmenu.TextBox
-	mainMenu.AddTextBox(&textbox1, "Start")
+	mainMenu.AddTextBox(&textbox1, "127.0.0.1")
+	textbox1.Text.SetColor(1, 1, 1)
 
 	// options
 	var label2 glmenu.Label
@@ -96,6 +97,7 @@ func mainMenuInit(window *glfw.Window) (err error) {
 		label2.Text.X2.Y - label2.Text.X1.Y +
 		label2.Text.X2.Y - label2.Text.X1.Y
 	textbox1.Text.SetPosition(0, totalHeight/2)
+
 	label3.Text.SetPosition(0, -totalHeight/2)
 
 	return
