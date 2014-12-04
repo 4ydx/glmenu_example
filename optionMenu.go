@@ -19,7 +19,6 @@ func optionMenuInit(window *glfw.Window) (err error) {
 		fmt.Println("error loading font")
 		os.Exit(1)
 	}
-	optionMenu.Font.SetTextLowerBound(0.3)
 	optionMenu.ResizeWindow(float32(width), float32(height))
 	optionMenu.Background = mgl32.Vec4{1, 1, 1, 1}
 	optionMenu.TextScaleRate = 0.05
