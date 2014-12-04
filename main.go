@@ -100,7 +100,7 @@ func main() {
 
 	gl.ClearColor(0, 0, 0, 0.0)
 	for !window.ShouldClose() {
-		gl.Clear(gl.COLOR_BUFFER_BIT)
+		gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 		xPos, yPos := window.GetCursorPosition()
 		mainMenu.MouseHover(xPos, yPos)
