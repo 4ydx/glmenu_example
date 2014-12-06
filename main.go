@@ -23,7 +23,11 @@ func keyCallback(
 	mods glfw.ModifierKey,
 ) {
 	if mainMenu.Visible && action == glfw.Release {
-		mainMenu.KeyPress(key)
+		if mods == glfw.ModShift {
+			mainMenu.KeyPress(key, true)
+		} else {
+			mainMenu.KeyPress(key, false)
+		}
 	} else {
 		if key == glfw.KeyM && action == glfw.Press {
 			if optionMenu.Visible {
@@ -32,10 +36,9 @@ func keyCallback(
 			mainMenu.Toggle()
 		}
 		if key == glfw.KeyO && action == glfw.Press {
-			if mainMenu.Visible {
-				mainMenu.Toggle()
+			if !mainMenu.Visible {
+				optionMenu.Toggle()
 			}
-			optionMenu.Toggle()
 		}
 	}
 }
