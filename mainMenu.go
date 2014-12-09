@@ -23,7 +23,7 @@ func mainMenuInit(window *glfw.Window) (err error) {
 
 	// start
 	var textbox1 glmenu.TextBox
-	mainMenu.AddTextBox(&textbox1, "127.0.0.1")
+	mainMenu.AddTextBox(&textbox1, "127.0.0.1", 100, 50, 2)
 	textbox1.Text.SetColor(1, 1, 1)
 
 	// options
