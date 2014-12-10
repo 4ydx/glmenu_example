@@ -23,7 +23,7 @@ func mainMenuInit(window *glfw.Window) (err error) {
 
 	// start
 	var textbox1 glmenu.TextBox
-	mainMenu.AddTextBox(&textbox1, "127.0.0.1", 200, 50, 2)
+	mainMenu.AddTextBox(&textbox1, "127.0.0.1", 200, 40, 1)
 	textbox1.Text.SetColor(1, 1, 1)
 
 	// options
@@ -95,7 +95,7 @@ func mainMenuInit(window *glfw.Window) (err error) {
 	totalHeight := textbox1.Text.X2.Y - textbox1.Text.X1.Y +
 		label2.Text.X2.Y - label2.Text.X1.Y +
 		label2.Text.X2.Y - label2.Text.X1.Y
-	textbox1.Text.SetPosition(0, totalHeight/2)
+	textbox1.SetPosition(0, totalHeight/2)
 
 	label3.Text.SetPosition(0, -totalHeight/2)
 
