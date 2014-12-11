@@ -84,7 +84,26 @@ func main() {
 	}
 	glfw.WindowHint(glfw.OpenglDebugContext, glfw.True)
 
-	window, err = glfw.CreateWindow(640, 480, "Testing", nil, nil)
+	// fullscreen
+	primary, err := glfw.GetPrimaryMonitor()
+	if err != nil {
+		panic(err)
+	}
+	vms, err := primary.GetVideoModes()
+	if err != nil {
+		panic(err)
+	}
+	for i, v := range vms {
+		fmt.Println(i, v)
+	}
+	w, h := vms[len(vms)-1].Width, vms[len(vms)-1].Height // you should probably pick one in another manner
+	window, err = glfw.CreateWindow(w, h, "Testing", nil, nil)
+	// fullscreen
+
+	// windowed
+	// window, err = glfw.CreateWindow(640, 480, "Testing", nil, nil)
+	// windowed
+
 	if err != nil {
 		panic(err)
 	}
