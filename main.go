@@ -97,7 +97,7 @@ func main() {
 		fmt.Println(i, v)
 	}
 	w, h := vms[len(vms)-1].Width, vms[len(vms)-1].Height // you should probably pick one in another manner
-	window, err = glfw.CreateWindow(w, h, "Testing", nil, nil)
+	window, err = glfw.CreateWindow(w, h, "Testing", primary, nil)
 	// fullscreen
 
 	// windowed
