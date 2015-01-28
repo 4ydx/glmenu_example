@@ -24,9 +24,9 @@ func keyCallback(
 ) {
 	if mainMenu.Visible && action == glfw.Release {
 		if mods == glfw.ModShift {
-			mainMenu.KeyPress(key, true)
+			mainMenu.KeyRelease(key, true)
 		} else {
-			mainMenu.KeyPress(key, false)
+			mainMenu.KeyRelease(key, false)
 		}
 	} else {
 		if key == glfw.KeyM && action == glfw.Press {
