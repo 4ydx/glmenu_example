@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	glmenu "github.com/4ydx/glmenu"
-	glfw "github.com/go-gl/glfw3"
+	"github.com/4ydx/glmenu"
+	"github.com/go-gl/glfw/v3.1/glfw"
 	"github.com/go-gl/mathgl/mgl32"
 	"os"
 )
