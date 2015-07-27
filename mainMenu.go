@@ -10,16 +10,22 @@ import (
 
 func mainMenuInit(window *glfw.Window) (err error) {
 	fontScale := int32(25)
+
+	// actually we are supposed to pass in the framebuffer sizes when creating the orthographic projection
+	// this would probably require some changes though in order to track mouse movement.  simply passing
+	// in "w" and "h" below into the Load methods (and resize methods) results in menues that are no longer clickable
 	width, height := window.GetSize()
-	err = mainMenu.Load(float32(width), float32(height), fontScale)
+	fmt.Println("the window is reporting w", width, "h", height)
+	w, h := window.GetFramebufferSize()
+	fmt.Println("the window is reporting w", w, "h", h)
+
+	err = mainMenu.Load(float32(width), float32(height), fontScale, mgl32.Vec2{})
 	if err != nil {
 		fmt.Println("error loading the font")
 		os.Exit(1)
 	}
 	mainMenu.ResizeWindow(float32(width), float32(height))
 	mainMenu.Background = mgl32.Vec4{0, 0, .20, 0}
-
-	//2DO: sounds
 
 	// start
 	var textbox1 glmenu.TextBox

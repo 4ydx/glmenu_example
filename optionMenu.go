@@ -14,7 +14,7 @@ func optionMenuInit(window *glfw.Window) (err error) {
 	leftMargin := float32(30)
 	fontScale := int32(25)
 	width, height := window.GetSize()
-	err = optionMenu.Load(float32(width), float32(height), fontScale)
+	err = optionMenu.Load(float32(width), float32(height), fontScale, mgl32.Vec2{})
 	if err != nil {
 		fmt.Println("error loading font")
 		os.Exit(1)
