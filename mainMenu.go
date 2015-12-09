@@ -5,11 +5,12 @@ import (
 	"github.com/4ydx/glmenu"
 	"github.com/go-gl/glfw/v3.1/glfw"
 	"github.com/go-gl/mathgl/mgl32"
+	"golang.org/x/image/math/fixed"
 	"os"
 )
 
 func mainMenuInit(window *glfw.Window) (err error) {
-	fontScale := int32(25)
+	fontScale := fixed.Int26_6(25)
 	width, height := window.GetSize()
 	err = mainMenu.Load(float32(width), float32(height), fontScale)
 	if err != nil {

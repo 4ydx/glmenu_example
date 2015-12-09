@@ -6,13 +6,14 @@ import (
 	"github.com/4ydx/gltext"
 	"github.com/go-gl/glfw/v3.1/glfw"
 	"github.com/go-gl/mathgl/mgl32"
+	"golang.org/x/image/math/fixed"
 	"os"
 )
 
 func optionMenuInit(window *glfw.Window) (err error) {
 	topMargin := float32(50)
 	leftMargin := float32(30)
-	fontScale := int32(25)
+	fontScale := fixed.Int26_6(25)
 	width, height := window.GetSize()
 	err = optionMenu.Load(float32(width), float32(height), fontScale)
 	if err != nil {
