@@ -81,11 +81,10 @@ func main() {
 
 	// fullscreen
 	primary := glfw.GetPrimaryMonitor()
-	vms := primary.GetVideoModes()
-	for i, v := range vms {
-		fmt.Println(i, v)
-	}
-	w, h := vms[len(vms)-1].Width, vms[len(vms)-1].Height // you should probably pick one in another manner
+	vm := primary.GetVideoMode()
+	w, h := vm.Width, vm.Height // you should probably pick one in another manner
+
+	fmt.Println("w", w, "h", h)
 	window, err = glfw.CreateWindow(w, h, "Testing", primary, nil)
 	// fullscreen
 
