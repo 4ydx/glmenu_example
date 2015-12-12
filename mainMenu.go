@@ -17,10 +17,10 @@ func mainMenuInit(window *glfw.Window) (err error) {
 	// in "w" and "h" below into the Load methods (and resize methods) results in menues that are no longer clickable
 	width, height := window.GetSize()
 	fmt.Println("the window is reporting w", width, "h", height)
-	w, h := window.GetFramebufferSize()
-	fmt.Println("the window is reporting w", w, "h", h)
+	//w, h := window.GetFramebufferSize()
+	//fmt.Println("the window is reporting w", w, "h", h)
 
-	err = mainMenu.Load(float32(width), float32(height), fontScale, mgl32.Vec2{})
+	mainMenu, err = glmenu.NewMenu(float32(width), float32(height), fontScale, mgl32.Vec2{})
 	if err != nil {
 		fmt.Println("error loading the font")
 		os.Exit(1)

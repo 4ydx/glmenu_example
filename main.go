@@ -55,8 +55,8 @@ func mouseButtonCallback(
 	}
 }
 
-var mainMenu glmenu.Menu
-var optionMenu glmenu.Menu
+var mainMenu *glmenu.Menu
+var optionMenu *glmenu.Menu
 var window *glfw.Window
 
 func main() {
