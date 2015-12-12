@@ -108,8 +108,6 @@ func main() {
 	version := gl.GoStr(gl.GetString(gl.VERSION))
 	fmt.Println("Opengl version", version)
 
-	gltext.IsDebug = true
-
 	// load font
 	fd, err := os.Open("font/luximr.ttf")
 	if err != nil {
@@ -123,10 +121,10 @@ func main() {
 	} else {
 		runesPerRow := fixed.Int26_6(16)
 		runeRanges := make(gltext.RuneRanges, 0)
-		runeRange := gltext.RuneRange{Low: 32, High: 127}
+		runeRange := gltext.RuneRange{Low: 1, High: 128}
 		runeRanges = append(runeRanges, runeRange)
 
-		scale := fixed.Int26_6(10)
+		scale := fixed.Int26_6(25)
 		font, err = gltext.NewTruetype(fd, scale, runeRanges, runesPerRow)
 		if err != nil {
 			panic(err)
