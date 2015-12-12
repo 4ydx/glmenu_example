@@ -56,7 +56,7 @@ func optionMenuInit(window *glfw.Window) (err error) {
 	label3.Text.SetPosition(-float32(width)/2.0+leftMargin, float32(height)/2.0-topMargin-label1.Text.Height)
 	label3.Text.Justify(gltext.AlignLeft)
 
-	label1.AddShadow(1.5, 0, 0, 0)
-	label3.AddShadow(1.5, 0, 0, 0)
+	label1.NewShadow(1.5, 0, 0, 0)
+	label3.NewShadow(1.5, 0, 0, 0)
 	return
 }
