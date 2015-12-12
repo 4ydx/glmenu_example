@@ -35,10 +35,9 @@ func mainMenuInit(window *glfw.Window) (err error) {
 	textbox1.Text.MaxRuneCount = 16
 
 	// options
-	var label2 glmenu.Label
-	mainMenu.AddLabel(&label2, "Options")
-
+	label2 := mainMenu.NewLabel("Options")
 	label2.Text.SetColor(0.5, 0.5, 0.5)
+
 	label2.OnClick = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
 		label.Text.SetColor(250.0/255.0, 0, 154.0/255.0)
 	}
@@ -68,10 +67,9 @@ func mainMenuInit(window *glfw.Window) (err error) {
 	}
 
 	// quit
-	var label3 glmenu.Label
-	mainMenu.AddLabel(&label3, "Quit")
-
+	label3 := mainMenu.NewLabel("Quit")
 	label3.Text.SetColor(0.5, 0.5, 0.5)
+
 	label3.OnClick = func(label *glmenu.Label, xPos, yPos float64, button glmenu.MouseClick, inBox bool) {
 		label.Text.SetColor(250.0/255.0, 0, 154.0/255.0)
 	}
