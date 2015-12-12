@@ -3,15 +3,13 @@ package main
 import (
 	"fmt"
 	"github.com/4ydx/glmenu"
+	"github.com/4ydx/gltext"
 	"github.com/go-gl/glfw/v3.1/glfw"
 	"github.com/go-gl/mathgl/mgl32"
-	"golang.org/x/image/math/fixed"
 	"os"
 )
 
-func mainMenuInit(window *glfw.Window) (err error) {
-	fontScale := fixed.Int26_6(25)
-
+func mainMenuInit(window *glfw.Window, font *gltext.Font) (err error) {
 	// actually we are supposed to pass in the framebuffer sizes when creating the orthographic projection
 	// this would probably require some changes though in order to track mouse movement.  simply passing
 	// in "w" and "h" below into the Load methods (and resize methods) results in menues that are no longer clickable
@@ -20,7 +18,7 @@ func mainMenuInit(window *glfw.Window) (err error) {
 	//w, h := window.GetFramebufferSize()
 	//fmt.Println("the window is reporting w", w, "h", h)
 
-	mainMenu, err = glmenu.NewMenu(float32(width), float32(height), fontScale, mgl32.Vec2{})
+	mainMenu, err = glmenu.NewMenu(font, float32(width), float32(height), mgl32.Vec2{})
 	if err != nil {
 		fmt.Println("error loading the font")
 		os.Exit(1)

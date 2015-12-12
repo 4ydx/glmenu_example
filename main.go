@@ -3,8 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/4ydx/glmenu"
+	"github.com/4ydx/gltext"
 	"github.com/go-gl/gl/v3.3-core/gl"
 	"github.com/go-gl/glfw/v3.1/glfw"
+	"golang.org/x/image/math/fixed"
+	"os"
 	"runtime"
 )
 
@@ -102,16 +105,41 @@ func main() {
 	if err := gl.Init(); err != nil {
 		panic(err)
 	}
-	/*
-		if err := gl32.Init(); err != nil {
-			fmt.Println("could not initialize GL 3.2")
-		}
-	*/
 	version := gl.GoStr(gl.GetString(gl.VERSION))
 	fmt.Println("Opengl version", version)
 
-	mainMenuInit(window)
-	optionMenuInit(window)
+	gltext.IsDebug = true
+
+	// load font
+	fd, err := os.Open("font/luximr.ttf")
+	if err != nil {
+		panic(err)
+	}
+	defer fd.Close()
+
+	font, err := gltext.LoadTruetype("fontconfigs")
+	if err == nil {
+		fmt.Println("Font loaded from disk...")
+	} else {
+		runesPerRow := fixed.Int26_6(16)
+		runeRanges := make(gltext.RuneRanges, 0)
+		runeRange := gltext.RuneRange{Low: 32, High: 127}
+		runeRanges = append(runeRanges, runeRange)
+
+		scale := fixed.Int26_6(10)
+		font, err = gltext.NewTruetype(fd, scale, runeRanges, runesPerRow)
+		if err != nil {
+			panic(err)
+		}
+		err = font.Config.Save("fontconfigs")
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	// load menus
+	mainMenuInit(window, font)
+	optionMenuInit(window, font)
 	mainMenu.Toggle()
 
 	gl.ClearColor(0, 0, 0, 0.0)
